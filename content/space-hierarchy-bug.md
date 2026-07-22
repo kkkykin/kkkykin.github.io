@@ -62,27 +62,6 @@ Cinny 的代码路径是：
 
 bug 出现在 Phase 2→Phase 3 的过渡阶段：声明通过了（所以 `children_state` 里有），但摘要解析或可见性判断出了问题（所以 `rooms[]` 里没有）。
 
-### 其他已知相关 bug
-
-- **[Issue #1522](https://forgejo.ellis.link/continuwuation/continuwuity/issues/1522)** — `roomid_spacehierarchy_cache` 未随 room event 失效，旧版 `v0.5.x` 可能持续返回过时的 children/member count
-- **`v0.5.10` federation 限制** — 只检查 `FuturesUnordered::next()` 的第一个完成结果。最快完成的 `via` 如果失败，其他仍可能成功的请求也会被放弃。新版 `v26.6.2` 已修复为逐个尝试全部 `via`
-- **`max_depth=1` off-by-one** — 曾导致只返回 space 本身不返回 child（已在 2025 年修复）
-
-## 判断方法
-
-一次 hierarchy 请求的两个位置提供了诊断线索：
-
-1. **child 不在 `children_state`** → 检查 `via` 是否缺失/为空/格式非法、suggested_only 过滤
-2. **child 在 `children_state`，但不在 `rooms[]`** → 声明已通过，问题在摘要解析、federation 或可见性判断
-
-同时在服务端日志中可以观察到：
-- `Preparing local summary for room`：走本地路径，`via` 不应影响结果
-- `Asking for room summary over federation ... via=[...]`：服务端未识别为本地 room，所有列出的 `via` 都失败后会静默省略（新版已修复单个 `via` 失败就放弃的问题）
-
 ## 总结
 
 这是一个 Continuwuity 服务端的 hierarchy bug（Issue #1789），不是客户端的问题。三个客户端的行为差异完全可以用它们对 hierarchy API 的信任程度来解释——Cinny 用本地 state 兜底，所以不受影响；ement.el 和 FluffyChat 直接渲染 `rooms[]`，bug 一览无余。
-
-对日常使用影响不大：Cinny 正常，Element 等其他客户端的行为取决于它们是否也做了本地 state 回退。Bug 修复等待上游发布即可。
-
-如果你想亲自验证自己的 space 是否受影响，对比 hierarchy 响应中的 `children_state` 和 `rooms[]` 是最快的判断方式。
