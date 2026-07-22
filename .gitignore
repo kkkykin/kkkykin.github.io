@@ -1,0 +1,6 @@
+public/
+
+# editor
+.DS_Store
+*.swp
+*.swo

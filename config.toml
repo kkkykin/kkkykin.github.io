@@ -1,0 +1,25 @@
+base_url = "https://kkkykin.github.io"
+compile_sass = true
+title = "blog"
+description = ""
+generate_feeds = true
+theme = "even"
+build_search_index = true
+
+taxonomies = [
+    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
+
+[markdown]
+highlight_code = true
+highlight_theme = "css"
+
+[extra]
+even_menu = [
+    {url = "$BASE_URL", name = "Home"},
+    {url = "$BASE_URL/categories", name = "Categories"},
+    {url = "$BASE_URL/tags", name = "Tags"},
+    {url = "$BASE_URL/about", name = "About"},
+]
+even_title = "blog"
