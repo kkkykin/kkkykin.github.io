@@ -5,7 +5,7 @@ description = "Tracking down a known Continuwuity hierarchy bug — some sub-roo
 
 [taxonomies]
 tags = ["matrix", "continuwuity", "bug", "spaces", "hierarchy"]
-categories = ["技术"]
+categories = ["tech"]
 +++
 
 ## The Symptom

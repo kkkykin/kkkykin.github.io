@@ -5,7 +5,7 @@ description = "追踪一个 Continuwuity hierarchy API 的已知 bug——部分
 
 [taxonomies]
 tags = ["matrix", "continuwuity", "bug", "spaces", "hierarchy"]
-categories = ["技术"]
+categories = ["tech"]
 +++
 
 ## 现象

@@ -5,7 +5,7 @@ description = "A quick debug session into an Emacs Matrix client: the formatted_
 
 [taxonomies]
 tags = ["emacs", "matrix", "ement", "debugging"]
-categories = ["技术"]
+categories = ["tech"]
 +++
 
 ## The Setup
