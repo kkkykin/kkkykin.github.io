@@ -30,7 +30,7 @@ jobs:
           sudo mv zola /usr/local/bin/
 
       - name: Build site
-        run: zola build
+        run: zola build --base-url "${{ vars.BASE_URL }}"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
